@@ -1,10 +1,25 @@
 /**
   colorscaleramp: https://github.com/Enjinoir/colorRamp.git
-  @version v1.0.1
+  @version v1.0.2
   @link https://github.com/Enjinoir/colorRamp#readme
   @author Ken Hogan
   @license MIT
 **/
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
 //final array of colors get pushed into colorRamp
 var colorRamp = []; //these two sets are common operations, posted everywhere
 
@@ -37,7 +52,7 @@ function convertHex(hex) {
 } //convert rgb values to hex
 
 
-var rgbToHex = function rgbToHex(rgb) {
+function rgbToHex(rgb) {
   var hex = Number(rgb).toString(16);
 
   if (hex.length < 2) {
@@ -45,9 +60,9 @@ var rgbToHex = function rgbToHex(rgb) {
   }
 
   return hex;
-};
+}
 
-var fullColorHex = function fullColorHex(cs) {
+function fullColorHex(cs) {
   var Cred = cs.Cred,
       Cgreen = cs.Cgreen,
       Cblue = cs.Cblue;
@@ -55,9 +70,8 @@ var fullColorHex = function fullColorHex(cs) {
   var green = rgbToHex(Cgreen);
   var blue = rgbToHex(Cblue);
   return red + green + blue;
-}; //desaturates the colors based on predetermined amounts.
+}
 //needs non-normalized values
-
 
 function desaturateColor(cs, sat) {
   var Cred = cs.Cred,
@@ -75,7 +89,7 @@ function desaturateColor(cs, sat) {
 } //luminosity from passed rgb color
 
 
-function Lum(cb) {
+function cLum(cb) {
   var Cred = cb.Cred,
       Cgreen = cb.Cgreen,
       Cblue = cb.Cblue;
@@ -88,7 +102,7 @@ function clipColor(cs) {
   var Cred = cs.Cred,
       Cgreen = cs.Cgreen,
       Cblue = cs.Cblue;
-  var L = Lum(cs);
+  var L = cLum(cs);
   var n = Math.min(Cred, Cgreen, Cblue);
   var x = Math.max(Cred, Cgreen, Cblue);
 
@@ -113,11 +127,11 @@ function clipColor(cs) {
 //the difference in luminosity is added to the target color via the delta
 
 
-function SetLum(cs, lum) {
+function setLum(cs, lum) {
   var Cred = cs.Cred,
       Cgreen = cs.Cgreen,
       Cblue = cs.Cblue;
-  var d = lum - Lum(cs);
+  var d = lum - cLum(cs);
   Cred = Cred + d;
   Cgreen = Cgreen + d;
   Cblue = Cblue + d;
@@ -129,7 +143,7 @@ function SetLum(cs, lum) {
 } //function to call and give single hex
 
 
-exports.colorscaleramp = function genRamp(hex) {
+function genRamp(hex) {
   var grayscaleRamp = {
     50: ['#F2F2F2', .10],
     100: ['#E6E6E6', .20],
@@ -152,7 +166,7 @@ exports.colorscaleramp = function genRamp(hex) {
       var colorSource = convertHex(hex);
       var blendSource = convertHex(entry[1][0]);
       var sat = entry[1][1];
-      swatch = SetLum(colorSource, Lum(blendSource));
+      swatch = setLum(colorSource, cLum(blendSource));
       swatch = desaturateColor(swatch, sat);
       swatch = normalize(swatch);
       swatch = fullColorHex(swatch);
@@ -161,12 +175,18 @@ exports.colorscaleramp = function genRamp(hex) {
       return colorRamp;
     });
   });
-};
+}
+//returns final color, use like below to call function on single color
+//console.log('look at this ramp', colorRamp);
 
-genRamp('#3C8081'); //returns final color, use like below to call function on single color
-
-console.log('look at this ramp', colorRamp);
-
-exports.printMsg = function () {
-  console.log("This is a message from the demo package");
-};
+module.exports = _defineProperty({
+  genRamp: genRamp,
+  setLum: setLum,
+  normalize: normalize,
+  clipColor: clipColor,
+  cLum: cLum,
+  desaturateColor: desaturateColor,
+  fullColorHex: fullColorHex,
+  rgbToHex: rgbToHex,
+  convertHex: convertHex
+}, "normalize", normalize);

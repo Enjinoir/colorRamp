@@ -36,7 +36,7 @@ function convertHex(hex) {
 }
 
 //convert rgb values to hex
-var rgbToHex = function (rgb) {
+function rgbToHex (rgb) {
     var hex = Number(rgb).toString(16);
     if (hex.length < 2) {
         hex = "0" + hex;
@@ -44,7 +44,7 @@ var rgbToHex = function (rgb) {
     return hex;
 };
 
-var fullColorHex = function (cs) {
+function fullColorHex (cs) {
     let {
         Cred,
         Cgreen,
@@ -80,7 +80,7 @@ function desaturateColor(cs, sat) {
 }
 
 //luminosity from passed rgb color
-function Lum(cb) {
+function cLum(cb) {
     let {
         Cred,
         Cgreen,
@@ -98,7 +98,7 @@ function clipColor(cs) {
         Cgreen,
         Cblue
     } = cs;
-    var L = Lum(cs);
+    var L = cLum(cs);
     var n = Math.min(Cred, Cgreen, Cblue);
     var x = Math.max(Cred, Cgreen, Cblue);
 
@@ -121,7 +121,7 @@ function clipColor(cs) {
 
 //sets luminosity by calculating the delta between background and foreground color
 //the difference in luminosity is added to the target color via the delta
-function SetLum(cs, lum) {
+function setLum(cs, lum) {
 
     let {
         Cred,
@@ -129,7 +129,7 @@ function SetLum(cs, lum) {
         Cblue
     } = cs;
 
-    let d = lum - Lum(cs);
+    let d = lum - cLum(cs);
     Cred = Cred + d;
     Cgreen = Cgreen + d;
     Cblue = Cblue + d;
@@ -141,7 +141,7 @@ function SetLum(cs, lum) {
 }
 
 //function to call and give single hex
-exports.colorscaleramp = function genRamp(hex) {
+function genRamp(hex) {
 
     const grayscaleRamp = {
         50: ['#F2F2F2', .10],
@@ -171,7 +171,7 @@ exports.colorscaleramp = function genRamp(hex) {
             let blendSource = convertHex(entry[1][0]);
             let sat = entry[1][1];
 
-            swatch = SetLum(colorSource, Lum(blendSource));
+            swatch = setLum(colorSource, cLum(blendSource));
             swatch = desaturateColor(swatch, sat);
             swatch = normalize(swatch);
             swatch = fullColorHex(swatch);
@@ -182,10 +182,8 @@ exports.colorscaleramp = function genRamp(hex) {
         })
     })
 };
-genRamp('#3C8081');
+//genRamp('#3C8081');
 //returns final color, use like below to call function on single color
-console.log('look at this ramp', colorRamp);
+//console.log('look at this ramp', colorRamp);
 
-exports.printMsg = function() {
-    console.log("This is a message from the demo package");
-  }
+module.exports = { genRamp, setLum, normalize, clipColor, cLum, desaturateColor, fullColorHex, rgbToHex, convertHex, normalize };
