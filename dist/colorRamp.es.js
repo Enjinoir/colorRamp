@@ -179,6 +179,17 @@ function genRamp(hex) {
 //returns final color, use like below to call function on single color
 //console.log('look at this ramp', colorRamp);
 
+module.exports.colorRamp = colorRamp;
+module.exports.genRamp = genRamp;
+module.exports.setLum = setLum;
+module.exports.normalize = normalize;
+module.exports.clipColor = clipColor;
+module.exports.cLum = cLum;
+module.exports.desaturateColor = desaturateColor;
+module.exports.fullColorHex = fullColorHex;
+module.exports.rgbToHex = rgbToHex;
+module.exports.convertHex = convertHex;
+module.exports.normalize = normalize;
 module.exports = _defineProperty({
   genRamp: genRamp,
   setLum: setLum,
