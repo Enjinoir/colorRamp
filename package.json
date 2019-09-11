@@ -1,0 +1,24 @@
+{
+  "name": "colorramp",
+  "version": "1.0.0",
+  "description": "https://github.com/Enjinoir/colorRamp.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "genRamp('#3C8081')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Enjinoir/colorRamp.git"
+  },
+  "keywords": [
+    "color-ramp",
+    "blend-color",
+    "color"
+  ],
+  "author": "Ken Hogan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Enjinoir/colorRamp/issues"
+  },
+  "homepage": "https://github.com/Enjinoir/colorRamp#readme"
+}
