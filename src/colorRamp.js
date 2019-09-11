@@ -141,7 +141,7 @@ function SetLum(cs, lum) {
 }
 
 //function to call and give single hex
-function genRamp(hex) {
+exports.colorscaleramp = function genRamp(hex) {
 
     const grayscaleRamp = {
         50: ['#F2F2F2', .10],
@@ -185,3 +185,7 @@ function genRamp(hex) {
 genRamp('#3C8081');
 //returns final color, use like below to call function on single color
 console.log('look at this ramp', colorRamp);
+
+exports.printMsg = function() {
+    console.log("This is a message from the demo package");
+  }
