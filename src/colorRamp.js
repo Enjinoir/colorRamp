@@ -23,9 +23,9 @@ function normalize(cs) {
 //convert hex to rgb
 function convertHex(hex) {
     hex = hex.toString().replace('#', '');
-    r = parseInt(hex.substring(0, 2), 16);
-    g = parseInt(hex.substring(2, 4), 16);
-    b = parseInt(hex.substring(4, 6), 16);
+    let r = parseInt(hex.substring(0, 2), 16),
+        g = parseInt(hex.substring(2, 4), 16),
+        b = parseInt(hex.substring(4, 6), 16);
 
     let rgbObj = {
         Cred: r / 255,
@@ -185,5 +185,15 @@ function genRamp(hex) {
 //genRamp('#3C8081');
 //returns final color, use like below to call function on single color
 //console.log('look at this ramp', colorRamp);
-
+module.exports.colorRamp = colorRamp;
+module.exports.genRamp = genRamp;
+module.exports.setLum = setLum;
+module.exports.normalize = normalize;
+module.exports.clipColor = clipColor;
+module.exports.cLum = cLum;
+module.exports.desaturateColor = desaturateColor;
+module.exports.fullColorHex = fullColorHex;
+module.exports.rgbToHex = rgbToHex;
+module.exports.convertHex = convertHex;
+module.exports.normalize = normalize;
 module.exports = { genRamp, setLum, normalize, clipColor, cLum, desaturateColor, fullColorHex, rgbToHex, convertHex, normalize };

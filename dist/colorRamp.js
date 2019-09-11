@@ -1,6 +1,6 @@
 /**
   colorscaleramp: https://github.com/Enjinoir/colorRamp.git
-  @version v1.0.2
+  @version v1.0.6
   @link https://github.com/Enjinoir/colorRamp#readme
   @author Ken Hogan
   @license MIT
@@ -45,9 +45,9 @@
 
   function convertHex(hex) {
     hex = hex.toString().replace('#', '');
-    r = parseInt(hex.substring(0, 2), 16);
-    g = parseInt(hex.substring(2, 4), 16);
-    b = parseInt(hex.substring(4, 6), 16);
+    var r = parseInt(hex.substring(0, 2), 16),
+        g = parseInt(hex.substring(2, 4), 16),
+        b = parseInt(hex.substring(4, 6), 16);
     var rgbObj = {
       Cred: r / 255,
       Cgreen: g / 255,
