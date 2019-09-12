@@ -7,3 +7,7 @@ Ramp can be altered throguh the genRamp function.  This is where the constant fo
 
 returns final color, use like below to call function on single color
 example: genRamp('#3C8081');
+The values are returned in an array called colorRamp
+
+//genRamp('#3C8081');
+//console.log('look at this ramp', colorRamp);
