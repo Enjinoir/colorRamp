@@ -1,0 +1,43 @@
+{
+  "name": "colorscaleramp",
+  "version": "1.0.8",
+  "description": "https://github.com/Enjinoir/colorRamp.git",
+  "main": "dist/colorRamp.js",
+  "module": "dist/colorRamp.es.js",
+  "unpkg": "dist/colorRamp.min.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rollup --config rollup.config.js",
+    "release": "node scripts/release.js && npm publish",
+    "version": "auto-changelog -p --template keepachangelog && npm run build && sleep 3 && git add .",
+    "lint": "eslint src/**/*.js scripts/**/*.js --fix",
+    "test": "node scripts/run-tests.js",
+    "test:es-check": "es-check es5 dist/colorramp.min.js dist/colorramp.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Enjinoir/colorRamp.git"
+  },
+  "keywords": [
+    "color-ramp",
+    "blend-color",
+    "color"
+  ],
+  "author": "Ken Hogan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Enjinoir/colorRamp/issues"
+  },
+  "homepage": "https://github.com/Enjinoir/colorRamp#readme",
+  "dependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel": "^6.23.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-uglify": "^6.0.3",
+    "uglify": "^0.1.5"
+  }
+}
