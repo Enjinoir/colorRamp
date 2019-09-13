@@ -4,7 +4,7 @@
   "description": "test",
   "main": "test.js",
   "dependencies": {
-    "colorscaleramp": "^1.0.7"
+    "colorscaleramp": "^1.0.8"
   },
   "devDependencies": {},
   "scripts": {

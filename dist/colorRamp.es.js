@@ -1,6 +1,6 @@
 /**
   colorscaleramp: https://github.com/Enjinoir/colorRamp.git
-  @version v1.0.7
+  @version v1.0.8
   @link https://github.com/Enjinoir/colorRamp#readme
   @author Ken Hogan
   @license MIT
@@ -170,11 +170,10 @@ function genRamp(hex) {
       swatch = desaturateColor(swatch, sat);
       swatch = normalize(swatch);
       swatch = fullColorHex(swatch);
-      colorRamp.push(swatch); //final color for each iteration in the loop
-
-      return colorRamp;
+      colorRamp.push(swatch);
     });
   });
+  return colorRamp;
 }
 module.exports = _defineProperty({
   colorRamp: colorRamp,

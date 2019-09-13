@@ -177,10 +177,9 @@ function genRamp(hex) {
             swatch = fullColorHex(swatch);
 
             colorRamp.push(swatch);
-            //final color for each iteration in the loop
-            return colorRamp;
         })
     })
+    return colorRamp;
 };
 
 
