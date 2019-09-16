@@ -1,27 +1,12 @@
 /**
   colorscaleramp: https://github.com/Enjinoir/colorRamp.git
-  @version v1.0.7
+  @version v1.0.9
   @link https://github.com/Enjinoir/colorRamp#readme
   @author Ken Hogan
   @license MIT
 **/
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-//final array of colors get pushed into colorRamp
-var colorRamp = []; //these two sets are common operations, posted everywhere
+// final array of colors get pushed into colorRamp
+var colorRamp = []; // these two sets are common operations, posted everywhere
 
 function normalize(cs) {
   var Cred = cs.Cred,
@@ -35,28 +20,28 @@ function normalize(cs) {
     Cgreen: Cgreen,
     Cblue: Cblue
   };
-} //convert hex to rgb
+} // convert hex to rgb
 
 
 function convertHex(hex) {
   hex = hex.toString().replace('#', '');
-  var r = parseInt(hex.substring(0, 2), 16),
-      g = parseInt(hex.substring(2, 4), 16),
-      b = parseInt(hex.substring(4, 6), 16);
+  var r = parseInt(hex.substring(0, 2), 16);
+  var g = parseInt(hex.substring(2, 4), 16);
+  var b = parseInt(hex.substring(4, 6), 16);
   var rgbObj = {
     Cred: r / 255,
     Cgreen: g / 255,
     Cblue: b / 255
   };
   return rgbObj;
-} //convert rgb values to hex
+} // convert rgb values to hex
 
 
 function rgbToHex(rgb) {
   var hex = Number(rgb).toString(16);
 
   if (hex.length < 2) {
-    hex = "0" + hex;
+    hex = "0".concat(hex);
   }
 
   return hex;
@@ -70,8 +55,9 @@ function fullColorHex(cs) {
   var green = rgbToHex(Cgreen);
   var blue = rgbToHex(Cblue);
   return red + green + blue;
-}
-//needs non-normalized values
+} // desaturates the colors based on predetermined amounts.
+// needs non-normalized values
+
 
 function desaturateColor(cs, sat) {
   var Cred = cs.Cred,
@@ -86,7 +72,7 @@ function desaturateColor(cs, sat) {
     Cgreen: Cgreen,
     Cblue: Cblue
   };
-} //luminosity from passed rgb color
+} // luminosity from passed rgb color
 
 
 function cLum(cb) {
@@ -95,7 +81,7 @@ function cLum(cb) {
       Cblue = cb.Cblue;
   var lum = 0.3 * Cred + 0.59 * Cgreen + 0.11 * Cblue;
   return lum;
-} //clips the color back into a normal range
+} // clips the color back into a normal range
 
 
 function clipColor(cs) {
@@ -123,8 +109,8 @@ function clipColor(cs) {
     Cgreen: Cgreen,
     Cblue: Cblue
   };
-} //sets luminosity by calculating the delta between background and foreground color
-//the difference in luminosity is added to the target color via the delta
+} // sets luminosity by calculating the delta between background and foreground color
+// the difference in luminosity is added to the target color via the delta
 
 
 function setLum(cs, lum) {
@@ -132,23 +118,23 @@ function setLum(cs, lum) {
       Cgreen = cs.Cgreen,
       Cblue = cs.Cblue;
   var d = lum - cLum(cs);
-  Cred = Cred + d;
-  Cgreen = Cgreen + d;
-  Cblue = Cblue + d;
+  Cred += d;
+  Cgreen += d;
+  Cblue += d;
   return clipColor({
     Cred: Cred,
     Cgreen: Cgreen,
     Cblue: Cblue
   });
-} //function to call and give single hex
+} // function to call and give single hex
 
 
 function genRamp(hex) {
   var grayscaleRamp = {
-    50: ['#F2F2F2', .10],
-    100: ['#E6E6E6', .20],
-    200: ['#CCCCCC', .30],
-    300: ['#B3B3B3', .65],
+    50: ['#F2F2F2', 0.10],
+    100: ['#E6E6E6', 0.20],
+    200: ['#CCCCCC', 0.30],
+    300: ['#B3B3B3', 0.65],
     400: ['#999999', 1],
     500: ['#808080', 1],
     600: ['#666666', 1],
@@ -158,10 +144,11 @@ function genRamp(hex) {
   }; // loop over the two colors
 
   Object.entries({
-    'guidance': hex
-  }).forEach(function (color) {
+    guidance: hex
+  }).forEach(function () {
     // loop over the grayscale ramp for each color
-    Object.entries(grayscaleRamp).forEach(function (entry, index) {
+    Object.entries(grayscaleRamp).forEach(function (entry) {
+      // determine name of current step
       var swatch;
       var colorSource = convertHex(hex);
       var blendSource = convertHex(entry[1][0]);
@@ -170,13 +157,13 @@ function genRamp(hex) {
       swatch = desaturateColor(swatch, sat);
       swatch = normalize(swatch);
       swatch = fullColorHex(swatch);
-      colorRamp.push(swatch); //final color for each iteration in the loop
-
-      return colorRamp;
+      colorRamp.push(swatch);
     });
   });
+  return colorRamp;
 }
-module.exports = _defineProperty({
+
+module.exports = {
   colorRamp: colorRamp,
   genRamp: genRamp,
   setLum: setLum,
@@ -187,4 +174,4 @@ module.exports = _defineProperty({
   fullColorHex: fullColorHex,
   rgbToHex: rgbToHex,
   convertHex: convertHex
-}, "normalize", normalize);
+};
