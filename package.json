@@ -36,6 +36,8 @@
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "babel": "^6.23.0",
+    "js-yaml": "^3.13.1",
+    "rollup": "^1.21.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-uglify": "^6.0.3",
     "uglify": "^0.1.5"
