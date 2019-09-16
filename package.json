@@ -1,6 +1,6 @@
 {
   "name": "colorscaleramp",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "https://github.com/Enjinoir/colorRamp.git",
   "main": "dist/colorRamp.js",
   "module": "dist/colorRamp.es.js",
@@ -36,6 +36,8 @@
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "babel": "^6.23.0",
+    "js-yaml": "^3.13.1",
+    "rollup": "^1.21.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-uglify": "^6.0.3",
     "uglify": "^0.1.5"
