@@ -153,26 +153,25 @@ function genRamp(hex) {
         900: ['#1A1A1A', 1],
     };
 
-    // loop over the two colors
-    Object.entries({
-        guidance: hex,
-    }).forEach(() => {
-        // loop over the grayscale ramp for each color
-        Object.entries(grayscaleRamp).forEach((entry) => {
-            // determine name of current step
-            let swatch;
+    // loop over the grayscale ramp for each color
+    Object.entries(grayscaleRamp).forEach((entry) => {
+        // array we store in temporarily
 
-            const colorSource = convertHex(hex);
-            const blendSource = convertHex(entry[1][0]);
-            const sat = entry[1][1];
+        let swatch;
 
-            swatch = setLum(colorSource, cLum(blendSource));
-            swatch = desaturateColor(swatch, sat);
-            swatch = normalize(swatch);
-            swatch = fullColorHex(swatch);
+        // conversions to start the loop
+        const colorSource = convertHex(hex);
+        const blendSource = convertHex(entry[1][0]);
+        const sat = entry[1][1];
 
-            colorRamp.push(swatch);
-        });
+        // work to generate the color
+        swatch = setLum(colorSource, cLum(blendSource));
+        swatch = desaturateColor(swatch, sat);
+        swatch = normalize(swatch);
+        swatch = fullColorHex(swatch);
+
+        // array store for the color
+        colorRamp.push(swatch);
     });
     return colorRamp;
 }

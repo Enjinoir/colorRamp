@@ -1,6 +1,6 @@
 {
   "name": "colorscaleramp",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "https://github.com/Enjinoir/colorRamp.git",
   "main": "dist/colorRamp.js",
   "module": "dist/colorRamp.es.js",

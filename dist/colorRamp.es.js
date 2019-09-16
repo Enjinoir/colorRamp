@@ -1,6 +1,6 @@
 /**
   colorscaleramp: https://github.com/Enjinoir/colorRamp.git
-  @version v1.0.9
+  @version v1.1.2
   @link https://github.com/Enjinoir/colorRamp#readme
   @author Ken Hogan
   @license MIT
@@ -141,24 +141,22 @@ function genRamp(hex) {
     700: ['#4D4D4D', 1],
     800: ['#333333', 1],
     900: ['#1A1A1A', 1]
-  }; // loop over the two colors
+  }; // loop over the grayscale ramp for each color
 
-  Object.entries({
-    guidance: hex
-  }).forEach(function () {
-    // loop over the grayscale ramp for each color
-    Object.entries(grayscaleRamp).forEach(function (entry) {
-      // determine name of current step
-      var swatch;
-      var colorSource = convertHex(hex);
-      var blendSource = convertHex(entry[1][0]);
-      var sat = entry[1][1];
-      swatch = setLum(colorSource, cLum(blendSource));
-      swatch = desaturateColor(swatch, sat);
-      swatch = normalize(swatch);
-      swatch = fullColorHex(swatch);
-      colorRamp.push(swatch);
-    });
+  Object.entries(grayscaleRamp).forEach(function (entry) {
+    // array we store in temporarily
+    var swatch; // conversions to start the loop
+
+    var colorSource = convertHex(hex);
+    var blendSource = convertHex(entry[1][0]);
+    var sat = entry[1][1]; // work to generate the color
+
+    swatch = setLum(colorSource, cLum(blendSource));
+    swatch = desaturateColor(swatch, sat);
+    swatch = normalize(swatch);
+    swatch = fullColorHex(swatch); // array store for the color
+
+    colorRamp.push(swatch);
   });
   return colorRamp;
 }
