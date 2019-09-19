@@ -12,3 +12,6 @@ var colors = colorscaleramp.genRamp('#7986cb');
 console.log(colors);
 
 Delete test to instantly save on precious bits!
+
+live test version here
+https://jsfiddle.net/enjinoir/n45mx1jb/
